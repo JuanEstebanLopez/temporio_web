@@ -21,5 +21,5 @@ from temporio_web.views import Home;
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', Home.as_view(), name='index'),
-    url(r'^j', views.post_list,name="in"),
+    # url(r'^j', views.post_list,name="in"),
 ]
