@@ -19,3 +19,6 @@ class Apunte (models.Model):
 
     def __unicode__(self):
         return unicode("{'nombre'"+ self.nombre+"}")
+
+# class Notificacion(models.Model):
+# 

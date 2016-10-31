@@ -39,7 +39,7 @@ def post_list(request):
 
 # Create your views here.
 class Home(TemplateView):
-    template_name = 'temporio/index.html'
+    template_name = 'temporio/profesor.html'
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
         context["aaa"]="asdasasdasd";
