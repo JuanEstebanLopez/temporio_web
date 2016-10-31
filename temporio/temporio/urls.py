@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from temporio_web import views;
+from temporio_web.views import Home;
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'', Home.as_view(), name='index'),
+    url(r'^j', views.post_list,name="in"),
 ]
