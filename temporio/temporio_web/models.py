@@ -1,9 +1,18 @@
 #encoding:utf-8
 from __future__ import unicode_literals
 
-from django.db import models
+import string
+import random
 
+from django.db import models
+from django.contrib.auth.models import User
 # Create your models here.
+
+class Notificacion(models.Model):
+    titulo= models.CharField(max_length=128)
+    descripcion= models.CharField(max_length=128)
+    fecha_alarma = models.DateField();
+    tiempo_alarma = models.DateTimeField();
 
 class Apunte (models.Model):
     nombre = models.CharField(max_length=128);
@@ -20,7 +29,12 @@ class Apunte (models.Model):
 
 
 class Profesor(models.Model):
-    user
+    user = models.OneToOneField(User);
+    codigo = models.CharField(max_length=20,unique=True);
+    nombre = models.CharField(max_length=50);
+    grupos=models.ManyToManyField("self");
+
+
 
 class Horario (models.Model):
     salon = models.CharField(max_length=10);
@@ -34,8 +48,3 @@ class Horario (models.Model):
 class materia(models.Model):
     nombre = models.CharField(max_length=128);
     codigo = models.CharField(max_length=20);
-
-
-class Notificacion(models.Model):
-    titulo= models.CharField(max_length=128)
-    descripcion= models.CharField(max_length=128)

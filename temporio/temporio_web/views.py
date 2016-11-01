@@ -46,11 +46,9 @@ class Home(TemplateView):
         print(str("HOMEEEEEEEEEEEEEEEE"))
         return context
 
-class TableroProfesor(DetailView):
+class TableroProfesor(TemplateView):
     template_name = 'temporio/profesor.html'
     model=Notificacion;
     def get_context_data(self, **kwargs):
-        context = super(Home, self).get_context_data(**kwargs)
-
-
+        context = super(TableroProfesor, self).get_context_data(**kwargs);
         return context
