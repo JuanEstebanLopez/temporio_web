@@ -31,7 +31,7 @@ from django.views.generic import View, FormView, UpdateView, CreateView, DetailV
 # from django.template import defaultfilters
 # from django.template.defaultfilters import slugify
 
-from models import Apunte
+from models import Apunte, Notificacion
 
 def post_list(request):
     print(str("_catasdasdas"))
@@ -39,9 +39,18 @@ def post_list(request):
 
 # Create your views here.
 class Home(TemplateView):
-    template_name = 'temporio/profesor.html'
+    template_name = 'temporio/index.html'
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
         context["aaa"]="asdasasdasd";
         print(str("HOMEEEEEEEEEEEEEEEE"))
+        return context
+
+class TableroProfesor(DetailView):
+    template_name = 'temporio/profesor.html'
+    model=Notificacion;
+    def get_context_data(self, **kwargs):
+        context = super(Home, self).get_context_data(**kwargs)
+
+
         return context
