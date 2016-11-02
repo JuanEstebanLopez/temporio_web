@@ -8,6 +8,11 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+class CodigoGrupo(models.Model):
+    codigo= models.CharField(max_length=128); # codigo_materia-num_grupo
+    def __unicode__(self):
+        return unicode(self.codigo);
+
 class Notificacion(models.Model):
     titulo= models.CharField(max_length=128);
     descripcion= models.CharField(max_length=128);
@@ -17,11 +22,11 @@ class Notificacion(models.Model):
     tipo_tarea = models.IntegerField(default=0);
     materia= models.CharField(max_length=128);
     grupo_materia= models.CharField(max_length=128);
-    # estado: 0-activo, 1-incompleta, 2-completa
-    estado = models.IntegerField(default=0);
+    # estado: 1-activo, 0-incompleta, 2-completa
+    estado = models.IntegerField(default=1);
     str_fecha=models.CharField(max_length=128);
     def __unicode__(self):
-        return unicode(self.str_fecha+"-"+self.tipo_repeticion+"-"+self.tipo_tarea+"-"+self.materia+"-"+self.descripcion+"-"+self.estado);
+        return unicode(self.str_fecha+"-"+self.tipo_repeticion+"-"+str(self.tipo_tarea)+"-"+self.materia+"-"+self.titulo+"-"+self.descripcion+"-"+str(self.estado));
 
 
 class Apunte (models.Model):
@@ -50,7 +55,7 @@ class  Estudiante(models.Model):
     user = models.OneToOneField(User);
     codigo = models.CharField(max_length=20,unique=True);
     nombre = models.CharField(max_length=50);
-    materias = models.ManyToManyField("self",blank=True); # id de grupo (horario)
+    materias = models.ManyToManyField(CodigoGrupo,blank=True); # id de grupo (horario)
     apuntes_compartidos = models.ManyToManyField(Apunte,related_name='compartidos',blank=True);
     apuntes_favoritos = models.ManyToManyField(Apunte,related_name='favoritos',blank=True);
     notificaciones_propias = models.ManyToManyField(Notificacion,related_name='notificaciones',blank=True); # id de grupo
@@ -66,7 +71,7 @@ class Horario (models.Model):
         return unicode( self.dia+" "+self.hora_inicio+"-"+self.hora_fin+" "+self.salon);
 
 class Grupo(models.Model):
-    codigo_grupo = models.CharField(max_length=20,unique=True);# codigo_materia-num_grupo
+    codigo_grupo = models.OneToOneField(CodigoGrupo,blank=True);# codigo_materia-num_grupo
     nombre_materia = models.CharField(max_length=128);
     horario = models.ManyToManyField(Horario);
     profesor= models.ForeignKey(Profesor);

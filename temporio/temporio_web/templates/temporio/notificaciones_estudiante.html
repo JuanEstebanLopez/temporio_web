@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+
+{
+	"eventos_defecto":[
+	"2016-7-1-7:00-PUNTUAL-0-Personal-De vuelta a Icesi-Inicio de clases-2"
+	{%if notificaciones_propias%}
+		{%for noti in notificaciones_propias%}
+			, "{{noti}}"
+		{%endfor%}
+	{%endif%}
+	]
+}

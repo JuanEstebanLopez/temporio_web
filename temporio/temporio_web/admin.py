@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Apunte, Notificacion, Profesor,Estudiante,Horario,Grupo,Materia
+from models import Apunte, Notificacion, Profesor,Estudiante,Horario,Grupo,Materia,CodigoGrupo
 # Register your models here.
 
 admin.site.register(Notificacion);
@@ -9,3 +9,4 @@ admin.site.register(Estudiante);
 admin.site.register(Horario);
 admin.site.register(Grupo);
 admin.site.register(Materia);
+admin.site.register(CodigoGrupo);

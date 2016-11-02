@@ -31,7 +31,7 @@ from django.views.generic import View, FormView, UpdateView, CreateView, DetailV
 # from django.template import defaultfilters
 # from django.template.defaultfilters import slugify
 
-from models import Apunte, Notificacion
+from models import Apunte, Notificacion, Profesor, Estudiante
 
 def post_list(request):
     print(str("_catasdasdas"))
@@ -48,7 +48,18 @@ class Home(TemplateView):
 
 class TableroProfesor(TemplateView):
     template_name = 'temporio/profesor.html'
-    model=Notificacion;
     def get_context_data(self, **kwargs):
         context = super(TableroProfesor, self).get_context_data(**kwargs);
+        pro = Profesor.objects.all().get(codigo=self.kwargs['codigo'])
+        return context
+
+class vistaNotificaciones(TemplateView):
+    template_name = 'temporio/notificaciones_estudiante.html'
+    def get_context_data(self, **kwargs):
+        context = super(vistaNotificaciones, self).get_context_data(**kwargs);
+        estudiante = Estudiante.objects.all().get(codigo=self.kwargs['codigo'])
+        # estudiante.materias.add("dasdsadas");
+        if estudiante:
+            context["estudiante"]=estudiante;
+            context["notificaciones_propias"]=estudiante.notificaciones_propias.all();
         return context
