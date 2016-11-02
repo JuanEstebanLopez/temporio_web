@@ -9,10 +9,20 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Notificacion(models.Model):
-    titulo= models.CharField(max_length=128)
-    descripcion= models.CharField(max_length=128)
+    titulo= models.CharField(max_length=128);
+    descripcion= models.CharField(max_length=128);
     fecha_alarma = models.DateField();
     tiempo_alarma = models.DateTimeField();
+    tipo_repeticion=models.CharField(max_length=20);
+    tipo_tarea = models.IntegerField(default=0);
+    materia= models.CharField(max_length=128);
+    grupo_materia= models.CharField(max_length=128);
+    # estado: 0-activo, 1-incompleta, 2-completa
+    estado = models.IntegerField(default=0);
+    str_fecha=models.CharField(max_length=128);
+    def __unicode__(self):
+        return unicode(self.str_fecha+"-"+self.tipo_repeticion+"-"+self.tipo_tarea+"-"+self.materia+"-"+self.descripcion+"-"+self.estado);
+
 
 class Apunte (models.Model):
     nombre = models.CharField(max_length=128);
@@ -22,7 +32,7 @@ class Apunte (models.Model):
     recurso = models.CharField(max_length=200);
     url = models.CharField(max_length=200);
     fecha_subida = models.DateField(auto_now_add=True);
-    apute_id= models.AutoField(primary_key=True);
+    # apute_id= models.AutoField(primary_key=True); -> pk
     codido_creador=models.CharField(max_length=20);
     def __unicode__(self):
         return unicode("{'nombre'"+ self.nombre+"}");
@@ -32,9 +42,20 @@ class Profesor(models.Model):
     user = models.OneToOneField(User);
     codigo = models.CharField(max_length=20,unique=True);
     nombre = models.CharField(max_length=50);
-    grupos=models.ManyToManyField("self");
+    grupos=models.ManyToManyField("self",blank=True);
+    def __unicode__(self):
+        return unicode( self.codigo+"-"+self.nombre);
 
-
+class  Estudiante(models.Model):
+    user = models.OneToOneField(User);
+    codigo = models.CharField(max_length=20,unique=True);
+    nombre = models.CharField(max_length=50);
+    materias = models.ManyToManyField("self",blank=True); # id de grupo (horario)
+    apuntes_compartidos = models.ManyToManyField(Apunte,related_name='compartidos',blank=True);
+    apuntes_favoritos = models.ManyToManyField(Apunte,related_name='favoritos',blank=True);
+    notificaciones_propias = models.ManyToManyField(Notificacion,related_name='notificaciones',blank=True); # id de grupo
+    def __unicode__(self):
+        return unicode( self.codigo+"-"+self.nombre);
 
 class Horario (models.Model):
     salon = models.CharField(max_length=10);
@@ -44,7 +65,17 @@ class Horario (models.Model):
     def __unicode__(self):
         return unicode( self.dia+" "+self.hora_inicio+"-"+self.hora_fin+" "+self.salon);
 
+class Grupo(models.Model):
+    codigo_grupo = models.CharField(max_length=20,unique=True);# codigo_materia-num_grupo
+    nombre_materia = models.CharField(max_length=128);
+    horario = models.ManyToManyField(Horario);
+    profesor= models.ForeignKey(Profesor);
+    estudiantes = models.ManyToManyField(Estudiante);
+    def __unicode__(self):
+        return unicode( self.codigo_grupo);
 
-class materia(models.Model):
+class Materia(models.Model):
     nombre = models.CharField(max_length=128);
     codigo = models.CharField(max_length=20);
+    def __unicode__(self):
+        return unicode( self.codigo+"-"+self.nombre);
