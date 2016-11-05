@@ -3,8 +3,25 @@
 
 {
 	"eventos_defecto":[
-	"2016-7-1-7:00-PUNTUAL-0-Personal-De vuelta a Icesi-Inicio de clases-2"
+	{%if existe%}
+	"2016-7-1-7:00-PUNTUAL-0-Personal-Bienvenido a Icesi-Inicio de clases.-2"
+	{%else%}
+	"2016-7-1-7:00-PUNTUAL-0-Personal-Icesi-Parece que no estas registrado en la base de datos de temporio dirigida a Icesi.-2"
+	{%endif%}
+	{%if notificaciones_materias%}
+		{%for noti in notificaciones_materias%}
+			, "{{noti}}"
+		{%endfor%}
+	{%endif%}
+	],
+  "eventos_usuario":[
+	{%if existe%}
+	"2016-7-1-7:00-PUNTUAL-0-Personal-Bienvenido a Temporio-Saludo compañero.-2"
+	{%else%}
+	"2016-7-1-7:00-PUNTUAL-0-Personal-Bienvenido a Temporio-Saludos, tu código de estudiante no está registrado en la base de datos.-2"
+	{%endif%}
 	{%if notificaciones_propias%}
+
 		{%for noti in notificaciones_propias%}
 			, "{{noti}}"
 		{%endfor%}

@@ -1,0 +1,322 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tempori Profesor</title>
+	<link rel="stylesheet" href="{% static "css/style.css" %}">
+	<link rel="icon" type="image/tempori_favicon.png" href="{% static "img/tempori_favicon.png"%}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="{% static "css/bootstrap.min.css" rel="stylesheet"%}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="{% static "css/datepicker.css"%}">
+      <link rel="stylesheet" href="{% static "css/bootstrap-timepicker.min.css"%}">
+      <link href="https://fonts.googleapis.com/css?family=Ruda" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
+</head>
+<body>
+
+<section class="publicar">
+
+
+<div id="myNav" class="overlay">
+<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<div class="container overlay-content">
+
+
+
+ <div id="editable" class="publicando lg-12">
+    <h3>Modificar Tarea</h3>
+		<!-- <input type="text" name="fname" placeholder="Titulo de la Tarea"><br>
+		<input type="text" name="fname" placeholder="Descripcion de la tarea"><br> -->
+
+    <input class="llenar" type="text" id="tituloEdit" placeholder="Título de la tarea" required>
+    <textarea  class="llenar"  type="text" id="descripcionEdit" placeholder="Descripción (opcional)"></textarea>
+
+  <div  class=" elementos">
+    <p>Fecha: <input id="fechaEdit" class="datepicker" data-date-format="mm/dd/yyyy" required></p>
+                <p>Hora:<input id="horaEdit" type="text" class="horas"></p>
+
+            <p>Grupo: <select class="horas" id="gruposEdit">
+        <option>Todos</option>
+        <option>Grupo 1</option>
+        <option>Grupo 2</option>
+        <option>Grupo 3</option>
+      </select> </p> <br>
+
+     <a class="enviar" id="guardar-cambios">Guardar Cambios</a>
+
+  </div>
+
+
+	</div>
+
+<div id= "aprobar" class="aprobando lg-12">
+
+ <h3>Completar Actividad</h3>
+
+ <nav class="grupos">
+ 	<ul>
+ 	    <li id="todos">Todos</li>
+ 		<li id="grupo1">Grupo 1</li>
+ 		<li id="grupo2">Grupo 2</li>
+ 		<li id="grupo3">Grupo 3</li>
+ 	</ul>
+ </nav>
+
+<div class="mostrar-grupo">
+
+<div class="grupo1">
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalA</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalB</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalC</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalD</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalE</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+</div>
+
+
+<div class="grupo2">
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalF</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalG</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalH</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalI</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalJ</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+</div>
+
+<div class="grupo3">
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalK</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalL</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalM</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalN</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+<div class="alumno lg-3">
+	<h4>Fulano de TalO</h4>
+     <div class="apru">
+   	 <span class="glyphicon glyphicon-ok ok-criolloA" id="pasa" data-title="Aprobar Alumno"></span>
+   	 <span class="glyphicon glyphicon-remove ok-criolloN" id="no-pasa" data-title="No Aprobar"></span>
+   	 </div>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+
+<a id="ok">Listo</a>
+	</div>
+
+</div>
+</div>
+</div>
+
+<div class="container muro">
+	<div class="publicando lg-12">
+    <h3>Registrar Tareas</h3>
+		<!-- <input type="text" name="fname" placeholder="Titulo de la Tarea"><br>
+		<input type="text" name="fname" placeholder="Descripcion de la tarea"><br> -->
+
+    <input class="llenar" type="text" id="titulo" placeholder="Título de la tarea" required>
+    <textarea  class="llenar"  type="text" id="descripcion" placeholder="Descripción (opcional)"></textarea>
+
+  <div class=" elementos">
+    <p>Fecha: <input id="fecha" class="datepicker" data-date-format="mm/dd/yyyy" required></p>
+                <p>Hora:<input id="hora" type="text" class="horas"></p>
+
+            <p>Grupo: <select class="horas" id="grupos">
+        <option>Todos</option>
+        <option>Grupo 1</option>
+        <option>Grupo 2</option>
+        <option>Grupo 3</option>
+      </select> </p> <br>
+
+     <a class="enviar" id="crear-tarea">Crear</a>
+
+  </div>
+
+
+	</div>
+
+
+  <div class="publicacion">
+  <span class="glyphicon glyphicon-remove-circle editar" id="borrar" data-title="Borrar"></span>
+   <span class="glyphicon glyphicon-edit editar" id="editar" data-title="Editar"></span>
+
+   <span class="glyphicon glyphicon-ok-circle editar" id="completar" data-title="Marcar como completo"></span>
+   <h3>Titulo de tarea</h3>
+
+   <div class="datos">
+   	<p class="fecha"><span>Fecha:</span>20/10/2016</p>
+   	<p class="hora"><span>Hora:</span> 11:55 AM</p>
+   	<p class="grupo"><span>Grupo:</span> Grupo 1</p>
+   	<p class="descripcion"><span>Descripción:</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin pharetra ullamcorper. Curabitur justo augue, posuere sit amet viverra a, aliquam in tellus.</p>
+
+   </div>
+  </div>
+
+  <div class="publicacion">
+  <span class="glyphicon glyphicon-remove-circle editar" id="borrar" data-title="Borrar"></span>
+   <span class="glyphicon glyphicon-edit editar" id="editar" data-title="Editar"></span>
+
+   <span class="glyphicon glyphicon-ok-circle editar" id="completar" data-title="Marcar como completo"></span>
+   <h3>Titulo de tarea 2</h3>
+
+   <div class="datos">
+   	<p class="fecha"><span>Fecha:</span>20/10/2016</p>
+   	<p class="hora"><span>Hora:</span> 1:55 AM</p>
+   	<p class="grupo"><span>Grupo:</span> Grupo 1</p>
+   	<p class="descripcion"><span contenteditable="false">Descripción:</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin pharetra ullamcorper. Curabitur justo augue, posuere sit amet viverra a, aliquam in tellus.</p>
+
+   </div>
+  </div>
+
+  <div class="publicacion">
+  <span class="glyphicon glyphicon-remove-circle editar" id="borrar" data-title="Borrar"></span>
+   <span class="glyphicon glyphicon-edit editar" id="editar" data-title="Editar"></span>
+
+   <span class="glyphicon glyphicon-ok-circle editar" id="completar" data-title="Marcar como completo"></span>
+   <h3>Titulo de tarea 3</h3>
+
+   <div class="datos">
+   	<p class="fecha"><span>Fecha:</span>20/10/2016</p>
+   	<p class="hora"><span>Hora:</span> 2:55 AM</p>
+   	<p class="grupo"><span>Grupo:</span> Grupo 1</p>
+   	<p class="descripcion"><span >Descripción:</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin pharetra ullamcorper. Curabitur justo augue, posuere sit amet viverra a, aliquam in tellus.</p>
+
+   </div>
+  </div>
+
+
+</div>
+
+</section>
+
+
+<script src="{% static "js/jquery-1.11.3.min.js"%}"></script>
+<script src="{% static "js/bootstrap.min.js"%}"></script>
+<script src="{% static "js/bootstrap-datepicker.js"%}"></script>
+<script src="{% static "js/bootstrap-timepicker.min.js"%}"></script>
+
+<script src="{% static "js/main.js"%}"></script>
+
+
+</body>
+</html>

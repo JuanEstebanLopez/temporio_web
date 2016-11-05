@@ -16,12 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from temporio_web import views;
-from temporio_web.views import Home, TableroProfesor, vistaNotificaciones;
+from temporio_web.views import Home, InicioProfesor, TableroProfesor, vistaNotificaciones;
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', Home.as_view(), name='index'),
-    url(r'^profesor/(?P<codigo>[-_\w]+)/$', TableroProfesor.as_view(), name='index'),
+    url(r'^profesor/(?P<codigo>[-_\w]+)/$', InicioProfesor.as_view(), name='index'),
+    url(r'^profesor/(?P<codigo>[-_\w]+)/tareas/$', TableroProfesor.as_view(), name='index'),    
     url(r'^notificaciones/estudiante/(?P<codigo>[-_\w]+)/$', vistaNotificaciones.as_view(), name='index'),
     # url(r'^j', views.post_list,name="in"),
 ]

@@ -21,7 +21,8 @@ class Notificacion(models.Model):
     tipo_repeticion=models.CharField(max_length=20);
     tipo_tarea = models.IntegerField(default=0);
     materia= models.CharField(max_length=128);
-    grupo_materia= models.CharField(max_length=128);
+    # grupo_materia= models.CharField(max_length=128);
+    grupos_materia_notificacion=models.ManyToManyField(CodigoGrupo,related_name='grupos_materia_notificacion',blank=True);
     # estado: 1-activo, 0-incompleta, 2-completa
     estado = models.IntegerField(default=1);
     str_fecha=models.CharField(max_length=128);
@@ -47,7 +48,7 @@ class Profesor(models.Model):
     user = models.OneToOneField(User);
     codigo = models.CharField(max_length=20,unique=True);
     nombre = models.CharField(max_length=50);
-    grupos=models.ManyToManyField("self",blank=True);
+    grupos=models.ManyToManyField(CodigoGrupo,related_name='grupos_profesor',blank=True);
     def __unicode__(self):
         return unicode( self.codigo+"-"+self.nombre);
 
@@ -55,7 +56,7 @@ class  Estudiante(models.Model):
     user = models.OneToOneField(User);
     codigo = models.CharField(max_length=20,unique=True);
     nombre = models.CharField(max_length=50);
-    materias = models.ManyToManyField(CodigoGrupo,blank=True); # id de grupo (horario)
+    materias = models.ManyToManyField(CodigoGrupo,related_name='materias_estudiante',blank=True); # id de grupo (horario)
     apuntes_compartidos = models.ManyToManyField(Apunte,related_name='compartidos',blank=True);
     apuntes_favoritos = models.ManyToManyField(Apunte,related_name='favoritos',blank=True);
     notificaciones_propias = models.ManyToManyField(Notificacion,related_name='notificaciones',blank=True); # id de grupo
@@ -67,13 +68,14 @@ class Horario (models.Model):
     hora_inicio = models.CharField(max_length=10);
     hora_fin = models.CharField(max_length=10);
     dia = models.CharField(max_length=10);
+    grupo = models.ForeignKey(CodigoGrupo,related_name='grupo_horario_materia',blank=True,null=True);
     def __unicode__(self):
         return unicode( self.dia+" "+self.hora_inicio+"-"+self.hora_fin+" "+self.salon);
 
 class Grupo(models.Model):
     codigo_grupo = models.OneToOneField(CodigoGrupo,blank=True);# codigo_materia-num_grupo
     nombre_materia = models.CharField(max_length=128);
-    horario = models.ManyToManyField(Horario);
+    horario = models.ManyToManyField(Horario,related_name='horarios_del_grupo');
     profesor= models.ForeignKey(Profesor);
     estudiantes = models.ManyToManyField(Estudiante);
     def __unicode__(self):
@@ -81,6 +83,7 @@ class Grupo(models.Model):
 
 class Materia(models.Model):
     nombre = models.CharField(max_length=128);
-    codigo = models.CharField(max_length=20);
+    codigo = models.CharField(max_length=20); 
+    grupos= models.ManyToManyField(Grupo,related_name='grupos_materia',blank=True);
     def __unicode__(self):
         return unicode( self.codigo+"-"+self.nombre);
