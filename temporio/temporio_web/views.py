@@ -31,7 +31,7 @@ from django.views.generic import View, FormView, UpdateView, CreateView, DetailV
 # from django.template import defaultfilters
 # from django.template.defaultfilters import slugify
 
-from models import Apunte, Notificacion, Profesor, Estudiante
+from models import Apunte, Notificacion, Profesor, Estudiante, Materia
 
 """
 Método usado para pedir las notificaciones de un estudiante que han sido cradas por sus profesores.
@@ -64,8 +64,8 @@ def getMateriasProfesor(profesor):
     grupos_profesor=profesor.grupos.all();
     todas_materias=Materia.objects.all();
     for m in todas_materias:
-        for g in grupos_profesor:
-            if g in m.grupos.objects.all():
+        for g in m.grupos.all():
+            if g.codigo_grupo in grupos_profesor:
                 materias.add(m);
     return materias;
 
@@ -86,22 +86,25 @@ class Home(TemplateView):
 
 
 class InicioProfesor (TemplateView):
-    template_name = 'temporio/profesor_tablero.html'
+    template_name = 'temporio/profesor.html'
     def get_context_data(self, **kwargs):
-        context = super(TableroProfesor, self).get_context_data(**kwargs);
+        context = super(InicioProfesor, self).get_context_data(**kwargs);
         cod=self.kwargs['codigo'];
+        context["codigo"]=cod;
         prfs=Profesor.objects.all().filter(codigo=cod);
         if prfs:
             context["existe"]=True;
             profesor = Profesor.objects.all().get(codigo=cod);
             context["profesor"]=profesor;
+            context["materias"]=getMateriasProfesor(profesor);
         return context
 
 class TableroProfesor(TemplateView):
-    template_name = 'temporio/profesor.html'
+    template_name = 'temporio/profesor_tablero.html'
     def get_context_data(self, **kwargs):
         context = super(TableroProfesor, self).get_context_data(**kwargs);
         cod=self.kwargs['codigo'];
+        context["codigo"]=cod;
         prfs=Profesor.objects.all().filter(codigo=cod);
         if prfs:
             context["existe"]=True;

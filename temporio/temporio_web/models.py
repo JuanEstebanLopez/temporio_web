@@ -75,15 +75,16 @@ class Horario (models.Model):
 class Grupo(models.Model):
     codigo_grupo = models.OneToOneField(CodigoGrupo,blank=True);# codigo_materia-num_grupo
     nombre_materia = models.CharField(max_length=128);
+    numero_grupo = models.IntegerField(default=0);
     horario = models.ManyToManyField(Horario,related_name='horarios_del_grupo');
     profesor= models.ForeignKey(Profesor);
-    estudiantes = models.ManyToManyField(Estudiante);
+    estudiantes = models.ManyToManyField(Estudiante,blank=True);
     def __unicode__(self):
         return unicode( self.codigo_grupo);
 
 class Materia(models.Model):
     nombre = models.CharField(max_length=128);
-    codigo = models.CharField(max_length=20); 
+    codigo = models.CharField(max_length=20);
     grupos= models.ManyToManyField(Grupo,related_name='grupos_materia',blank=True);
     def __unicode__(self):
         return unicode( self.codigo+"-"+self.nombre);

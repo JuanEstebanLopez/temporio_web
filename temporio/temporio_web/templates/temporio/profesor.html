@@ -1,1 +1,57 @@
 {% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+<title>{{profesor.nombre}}</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="{% static "css/style.css" %}" />
+<link rel="icon" type="image/tempori_favicon.png" href="{% static "img/tempori_favicon.png"%}">
+</head>
+
+<body>
+    <header>
+      {%if existe %}
+       <h1>{{profesor.nombre}}</h1>
+       <p>Profesor código:{{codigo}}</p>
+       {%else%}
+       <h1>Profesor</h1>
+       <p>No se encuentra profesor con código {{codigo}}</p>
+       {%endif%}
+
+    </header>
+    <section>
+       <article>
+           <h2>Materias<h2>
+             {% for mat in materias %}
+               {{mat.codigo}}-{{mat.nombre}}. <br>
+               {% for g in mat.grupos.all %}
+                  {%for pg in profesor.grupos.all%}
+
+                    {% ifequal  pg g.codigo_grupo%}
+                      <h3>{{g.numero_grupo}}:</h3>
+                        <p>
+                          {%for h in g.horario.all%}
+                           {{h}} |
+                          {%endfor%}
+                        </p>
+                    {% endifequal %}
+                  {%endfor%}
+               {%endfor%}
+             {% empty %}
+             <p> No hay materias asignadas </p>
+             {% endfor %}
+
+       </article>
+    </section>
+
+    <aside>
+       <a href="/profesor/{{codigo}}/tareas/"><h3>notificaciones</h3></a>
+
+    </aside>
+    <footer>
+
+    </footer>
+</body>
+</html>
