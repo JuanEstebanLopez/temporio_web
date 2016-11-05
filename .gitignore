@@ -3,4 +3,5 @@ __pycache__
 venv
 comandos.txt
 db.sqlite3
+migrations
 .DS_Store
