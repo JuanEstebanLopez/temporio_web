@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-# import datetime
+import datetime
 # import string
 # import random
 # import base64
@@ -12,7 +12,7 @@ from django.shortcuts import render
 
 from django.views.generic import View, FormView, UpdateView, CreateView, DetailView, ListView, TemplateView
 # from django.contrib.auth import authenticate, login, logout
-# from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 # from django.contrib.auth.decorators import login_required
 # from django.core.urlresolvers import reverse
 # from django.contrib import auth
@@ -29,9 +29,9 @@ from django.views.generic import View, FormView, UpdateView, CreateView, DetailV
 # from django.http import Http404
 #
 # from django.template import defaultfilters
-# from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify
+from models import Apunte, Notificacion, Profesor, Estudiante, Materia, Grupo,CodigoGrupo
 
-from models import Apunte, Notificacion, Profesor, Estudiante, Materia
 
 """
 Método usado para pedir las notificaciones de un estudiante que han sido cradas por sus profesores.
@@ -49,7 +49,7 @@ def getNotificacionesEstudiantes(estudiante):
 """
 Método usado para pedir las notificaciones que un profesores ha creado para sus grupos.
 """
-def getNotificacionesEstudiantes(profesor):
+def getNotificacionesProfesor(profesor):
     notis=set([]);
     grupos_profesor=profesor.grupos.all();
     todas_notis=Notificacion.objects.all();
@@ -59,6 +59,9 @@ def getNotificacionesEstudiantes(profesor):
                 notis.add(n);
     return notis;
 
+"""
+Método usado para pedir las materias que da un profesor dependiendo de los geupos que tenga.
+"""
 def getMateriasProfesor(profesor):
     materias=set([]);
     grupos_profesor=profesor.grupos.all();
@@ -68,8 +71,39 @@ def getMateriasProfesor(profesor):
             if g.codigo_grupo in grupos_profesor:
                 materias.add(m);
     return materias;
+"""
+Método para dar el formato de hora del json, desde un datetimefield.
+"""
+def getSTRFecha(fech):
+    h=fech.hour
+    m=fech.minute;
+    hora="";
+    if h<10:
+        hora=hora+"0";
+    hora=hora+str(h)+":";
+    if m<10:
+        hora=hora+"0";
+    hora=hora+str(m);
+    fecha=str(fech.year)+"-"+str(fech.month)+"-"+str(fech.day)+"-"+hora;
+    return fecha;
 
+def crearNuevaNotificacionGrupo(request,dia,mes,anio,hora,minuto,tipo,titulo,descripcion,grupo):
+    print("asda____________"+hora);
+    myStr = anio+"-"+mes+"-"+dia+" "+hora+":"+minuto;
+    tiem_al = datetime.datetime.strptime(myStr, "%Y-%m-%d %H:%M");
+    fech_al =tiem_al;
 
+    str_fech=anio+"-"+mes+"-"+dia+"-"+hora+":"+minuto;
+    cg=CodigoGrupo.objects.all().get(codigo=grupo);
+    gr= Grupo.objects.all().get(codigo_grupo=cg);
+    noti=Notificacion(titulo=titulo,descripcion=descripcion,fecha_alarma =fech_al,tiempo_alarma =tiem_al,tipo_tarea =tipo,materia=gr.nombre_materia,tipo_repeticion="PUNTUAL",estado = 1,str_fecha=str_fech
+    );
+    noti.save();
+    noti.grupos_materia_notificacion.add(cg);
+    noti.save();
+    # s = "/"
+    # return HttpResponseRedirect(s);
+    return render(request, 'temporio/profesor_tablero_publicacion.html', {"noti":noti})
 
 def post_list(request):
     print(str("_catasdasdas"))
@@ -109,6 +143,8 @@ class TableroProfesor(TemplateView):
         if prfs:
             context["existe"]=True;
             profesor = Profesor.objects.all().get(codigo=cod);
+            context["grupos"]=Grupo.objects.all().filter(profesor=profesor);
+            context["notificaciones"]=getNotificacionesProfesor(profesor);
         return context
 
 class vistaNotificaciones(TemplateView):

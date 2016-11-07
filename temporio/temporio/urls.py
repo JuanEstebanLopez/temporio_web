@@ -22,7 +22,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', Home.as_view(), name='index'),
     url(r'^profesor/(?P<codigo>[-_\w]+)/$', InicioProfesor.as_view(), name='index'),
-    url(r'^profesor/(?P<codigo>[-_\w]+)/tareas/$', TableroProfesor.as_view(), name='index'),    
+    url(r'^profesor/(?P<codigo>[-_\w]+)/tareas/$', TableroProfesor.as_view(), name='index'),
+    # url(r'^crear_alarma/(?P<dia>[0-9]+)/(?P<mes>[0-9]+)/(?P<anio>[0-9]+)/(?P<hora>[-_\w]+)/(?P<minuto>[-_\w]+)/(?P<tipo>[0-9]+)/(?P<titulo>[-_\w]+)/(?P<descripcion>[-_\w]+)/(?P<materia>[-_\w]+)/$', views.crearNuevaNotificacion, name='crear_notificacion_sin_grupo'),
+    url(r'^crear_alarma/(?P<dia>[0-9]+)/(?P<mes>[0-9]+)/(?P<anio>[0-9]+)/(?P<hora>[-_\w]+)/(?P<minuto>[-_\w]+)/(?P<tipo>[0-9]+)/(?P<titulo>[ -_\w]+)/(?P<descripcion>[ -_\w]+)/(?P<grupo>[-_\w]+)/$', views.crearNuevaNotificacionGrupo, name='crear_notificacion_con_grupo'),
     url(r'^notificaciones/estudiante/(?P<codigo>[-_\w]+)/$', vistaNotificaciones.as_view(), name='index'),
     # url(r'^j', views.post_list,name="in"),
 ]

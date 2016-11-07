@@ -1,0 +1,21 @@
+{% load temporio_tags %}
+<div class="publicacion">
+  <span class="glyphicon glyphicon-remove-circle editar" id="borrar" data-title="Borrar"></span>
+  <span class="glyphicon glyphicon-edit editar" id="editar" data-title="Editar"></span>
+  <span class="glyphicon glyphicon-ok-circle editar" id="completar" data-title="Marcar como completo"></span>
+  <h3>{{n.titulo}}</h3>
+
+  <div class="datos">
+    <p class="fecha"><span>Fecha:</span>{{noti | get_fecha_notificacion}}</p>
+    <p class="hora"><span>Hora:</span> {{noti | get_hora_notificacion}}</p>
+    {% if n.grupos_materia_notificacion%}
+      <p class="grupo"><span>Grupo:</span>
+        {% for n in noti.grupos_materia_notificacion.all%}
+          {{n|get_nombre_grupo}}
+        {% endfor %}
+      </p>
+    {% endif %}
+    <p class="descripcion"><span >Descripción:</span>{{n.descripcion}}.</p>
+
+  </div>
+</div>
