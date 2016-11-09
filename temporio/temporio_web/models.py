@@ -33,15 +33,17 @@ class Notificacion(models.Model):
 class Apunte (models.Model):
     nombre = models.CharField(max_length=128);
     tipo = models.IntegerField(default=0);
-    fecha_creacion = models.CharField(max_length=128);
-    hora_creacion = models.CharField(max_length=128);
-    recurso = models.CharField(max_length=200);
+    fecha_creacion = models.CharField(max_length=128,null=True);
+    hora_creacion = models.CharField(max_length=128,null=True);
+    recurso = models.CharField(max_length=200,null=True);
     url = models.CharField(max_length=200);
     fecha_subida = models.DateField(auto_now_add=True);
     # apute_id= models.AutoField(primary_key=True); -> pk
     codido_creador=models.CharField(max_length=20);
+    def jfonFormat(self):
+        return "{\"nombre\": \"" + self.nombre + "\",\n"+ "\"tipo\": \"" + str(self.tipo) + "\",\n"+ "\"fecha\": \"" + self.fecha_creacion + "\",\n"+ "\"hora\": \"" + self.hora_creacion + "\",\n"+"\"recurso\": \""  + self.recurso + "\",\n"+ "\"url\": \"" + self.url + "\"\n"+"}";
     def __unicode__(self):
-        return unicode("{'nombre'"+ self.nombre+"}");
+        return unicode(self.nombre+"-"+self.codido_creador);
 
 
 class Profesor(models.Model):

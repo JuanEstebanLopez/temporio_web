@@ -162,3 +162,19 @@ class vistaNotificaciones(TemplateView):
                 context["notificaciones_propias"]=estudiante.notificaciones_propias.all();
                 context["notificaciones_materias"]=getNotificacionesEstudiantes(estudiante);
         return context
+
+class vistaApuntes(TemplateView):
+    template_name = 'temporio/apuntes_estudiante.html'
+    def get_context_data(self, **kwargs):
+        context = super(vistaApuntes, self).get_context_data(**kwargs);
+        cod=self.kwargs['codigo'];
+        estus=Estudiante.objects.all().filter(codigo=cod);
+        if estus:
+            context["existe"]=True;
+            estudiante = Estudiante.objects.all().get(codigo=cod)
+            # estudiante.materias.add("dasdsadas");
+            if estudiante:
+                context["estudiante"]=estudiante;
+                context["apuntes_favoritos"]=estudiante.apuntes_favoritos.all();
+                context["apuntes_compartidos"]=estudiante.apuntes_compartidos.all();
+        return context

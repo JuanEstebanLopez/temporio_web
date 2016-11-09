@@ -1,0 +1,22 @@
+{% load staticfiles %}
+
+
+{
+	"apuntes_compartidos":[
+	{"nombre": "Temporio", "tipo": "3", "fecha": "2016-7-1", "hora": "18:00", "recurso": "none", "url": "https://drive.google.com/open?id=0B1kn9O3IcMQJZW5qVGF5RGkxb2c" }
+	{%if apuntes_compartidos%}
+		{%for apun in apuntes_compartidos%}
+			, {{apun}}
+		{%endfor%}
+	{%endif%}
+	],
+  "apuntes_favoritos":[
+	{"nombre": "Temporio", "tipo": "3", "fecha": "2016-7-1", "hora": "18:00", "recurso": "none", "url": "https://drive.google.com/open?id=0B1kn9O3IcMQJNlFOVnhpbnRMSFU" }
+	{%if apuntes_favoritos%}
+
+		{%for apun in apuntes_favoritos%}
+			, {{apun.jfonFormat}}
+		{%endfor%}
+	{%endif%}
+	]
+}
