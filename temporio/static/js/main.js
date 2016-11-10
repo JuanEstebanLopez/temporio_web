@@ -79,6 +79,9 @@ $( document ).ready(function(){
     var m=hora[1].split(" ");
     if(m[1]=="PM"){
       h+=12;
+      if(h==24){
+        h=0;
+      }
     }
     str_hora=h+"/"+m[0];
     var str_url='/crear_alarma/'+fechaP+"/"+str_hora+"/"+tipoP+"/"+tituloP+"/"+descripcionP+"/";
@@ -94,7 +97,7 @@ $( document ).ready(function(){
     type: 'get',
     success: function(response){
         $('.muro').append("<div class='publicacion'>"+"<span class='glyphicon glyphicon-remove-circle editar' id='borrar' data-title='Borrar'>"+"</span>"+"<span class='glyphicon glyphicon-edit editar' id='editar' data-title='Editar'>"+"</span>"+"<span class='glyphicon glyphicon-ok-circle editar' id='completar' data-title='Marcar como Completo'>"+"</span>"+"<h3>"+tituloP+"</h3>"+"<div class='datos'>"+"<p class='fecha'>"+"<span> Fecha:"+"</span>"+fechaP+"</p>"+"<p class='hora'>"+"<span> Hora:"+"</span>"+horaP+"</p>"+"<p class='grupo'>"+"<span> Grupo:"+"</span>"+grupoP+"</p>"+"<p class='descripcion'>"+"<span> Descripcion:"+"</span>"+descripcionP+"</p>"+"</div>"+"</div>");
-        console.log(response); 
+        console.log(response);
         alert("Se ha cread la nueva notificación exitosamente.");
         $('#titulo').val("");
         $('#descripcion').val("");

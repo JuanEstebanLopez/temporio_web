@@ -92,7 +92,7 @@ def crearNuevaNotificacionGrupo(request,dia,mes,anio,hora,minuto,tipo,titulo,des
     myStr = anio+"-"+mes+"-"+dia+" "+hora+":"+minuto;
     tiem_al = datetime.datetime.strptime(myStr, "%Y-%m-%d %H:%M");
     fech_al =tiem_al;
-
+    mes=mes-1;
     str_fech=anio+"-"+mes+"-"+dia+"-"+hora+":"+minuto;
     cg=CodigoGrupo.objects.all().get(codigo=grupo);
     gr= Grupo.objects.all().get(codigo_grupo=cg);
