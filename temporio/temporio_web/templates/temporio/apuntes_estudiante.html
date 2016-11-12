@@ -22,7 +22,9 @@
 	{"nombre": "Temporio", "tipo": "3", "fecha": "2016-7-1", "hora": "18:00", "recurso": "none", "url": "https://drive.google.com/open?id=0B1kn9O3IcMQJN3JIenhnNkVwLUE" }
 	{%if apuntes_recibidos%}
 		{%for apun in apuntes_recibidos%}
-			, {{apun.jfonFormat}}
+			,
+			{"nombre": "{{apun.nombre}}", "tipo": "{{apun.tipo}}", "fecha": "{{apun.fecha_creacion}}", "hora": "{{apun.hora_creacion}}", "recurso": "{{apun.recurso}}", "url": "{{apun.url}}" }
+
 		{%endfor%}
 	{%endif%}
 	]
