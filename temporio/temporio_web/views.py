@@ -177,5 +177,5 @@ class vistaApuntes(TemplateView):
                 context["estudiante"]=estudiante;
                 context["apuntes_favoritos"]=estudiante.apuntes_favoritos.all();
                 context["apuntes_compartidos"]=estudiante.apuntes_compartidos.all();
-                context["apuntes_recibidos"]=estudiante.apuntes_apuntes_enviados.all();
+                context["apuntes_recibidos"]=estudiante.apuntes_enviados.all();
         return context
