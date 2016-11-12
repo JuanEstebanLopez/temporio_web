@@ -41,7 +41,7 @@ class Apunte (models.Model):
     # apute_id= models.AutoField(primary_key=True); -> pk
     codido_creador=models.CharField(max_length=20);
     def jfonFormat(self):
-        return str("{\"nombre\": \"" + self.nombre + "\",\n"+ "\"tipo\": \"" + str(self.tipo) + "\",\n"+ "\"fecha\": \"" + self.fecha_creacion + "\",\n"+ "\"hora\": \"" + self.hora_creacion + "\",\n"+"\"recurso\": \""  + self.recurso + "\",\n"+ "\"url\": \"" + self.url + "\"\n"+"}");
+        return "{'nombre': '" + self.nombre + "',\n"+ "'tipo': '" + str(self.tipo) + "',\n"+ "'fecha': '" + self.fecha_creacion + "',\n"+ "'hora': '" + self.hora_creacion + "',\n"+"'recurso': '"  + self.recurso + "',\n"+ "'url': '" + self.url + "'\n"+"}";
     def __unicode__(self):
         return unicode(self.nombre+"-"+self.codido_creador);
 
