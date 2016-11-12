@@ -61,6 +61,7 @@ class  Estudiante(models.Model):
     materias = models.ManyToManyField(CodigoGrupo,related_name='materias_estudiante',blank=True); # id de grupo (horario)
     apuntes_compartidos = models.ManyToManyField(Apunte,related_name='compartidos',blank=True);
     apuntes_favoritos = models.ManyToManyField(Apunte,related_name='favoritos',blank=True);
+    apuntes_enviados = models.ManyToManyField(Apunte,related_name='enviados',blank=True);
     notificaciones_propias = models.ManyToManyField(Notificacion,related_name='notificaciones',blank=True); # id de grupo
     def __unicode__(self):
         return unicode( self.codigo+"-"+self.nombre);

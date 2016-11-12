@@ -88,7 +88,7 @@ def getSTRFecha(fech):
     return fecha;
 
 def crearNuevaNotificacionGrupo(request,dia,mes,anio,hora,minuto,tipo,titulo,descripcion,grupo):
-    print("asda____________"+hora);
+    # print("asda____________"+hora);
     myStr = anio+"-"+mes+"-"+dia+" "+hora+":"+minuto;
     tiem_al = datetime.datetime.strptime(myStr, "%Y-%m-%d %H:%M");
     fech_al =tiem_al;
@@ -177,4 +177,5 @@ class vistaApuntes(TemplateView):
                 context["estudiante"]=estudiante;
                 context["apuntes_favoritos"]=estudiante.apuntes_favoritos.all();
                 context["apuntes_compartidos"]=estudiante.apuntes_compartidos.all();
+                context["apuntes_recibidos"]=estudiante.apuntes_apuntes_enviados.all();
         return context

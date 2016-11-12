@@ -13,8 +13,15 @@
   "apuntes_favoritos":[
 	{"nombre": "Temporio", "tipo": "3", "fecha": "2016-7-1", "hora": "18:00", "recurso": "none", "url": "https://drive.google.com/open?id=0B1kn9O3IcMQJNlFOVnhpbnRMSFU" }
 	{%if apuntes_favoritos%}
-
 		{%for apun in apuntes_favoritos%}
+			, {{apun.jfonFormat}}
+		{%endfor%}
+	{%endif%}
+	],
+  "apuntes_recibidos":[
+	{"nombre": "Temporio", "tipo": "3", "fecha": "2016-7-1", "hora": "18:00", "recurso": "none", "url": "https://drive.google.com/open?id=0B1kn9O3IcMQJN3JIenhnNkVwLUE" }
+	{%if apuntes_recibidos%}
+		{%for apun in apuntes_recibidos%}
 			, {{apun.jfonFormat}}
 		{%endfor%}
 	{%endif%}
