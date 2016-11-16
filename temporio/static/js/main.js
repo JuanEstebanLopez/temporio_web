@@ -29,7 +29,8 @@ $( document ).ready(function(){
     var comprobar = titulo.toLowerCase();
     var arreglo = comprobar.split(' ');
     console.log(arreglo);
-    var compendio = ['parcial', 'taller', 'tarea','lectura', 'trabajo', 'exposicion', 'exposición', 'grupal'];
+    // var compendio = ['parcial', 'taller', 'tarea','lectura', 'trabajo', 'exposicion', 'exposición', 'grupal'];
+     var compendio = ["Lectura", "Tarea", "Exposición", "Taller", "Quiz", "Parcial" ];
     var tipo = 0;
 
     //Permite comparar que datos tienen en comun el titulo y el compendio
