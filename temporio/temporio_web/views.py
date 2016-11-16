@@ -89,12 +89,11 @@ def getSTRFecha(fech):
 
 def crearNuevaNotificacionGrupo(request,dia,mes,anio,hora,minuto,tipo,titulo,descripcion,grupo):
     # print("asda____________"+hora);
-
-
     myStr = anio+"-"+mes+"-"+dia+" "+hora+":"+minuto;
     tiem_al = datetime.datetime.strptime(myStr, "%Y-%m-%d %H:%M");
     fech_al =tiem_al;
-    mes_android= mes-1;
+    # mes_android= mes-1;
+    mes_android=mes;
     str_fech=anio+"-"+mes_android+"-"+dia+"-"+hora+":"+minuto;
     cg=CodigoGrupo.objects.all().get(codigo=grupo);
     gr= Grupo.objects.all().get(codigo_grupo=cg);
