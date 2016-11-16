@@ -206,7 +206,7 @@
 				<p>Hora:<input id="hora" type="text" class="horas"></p>
 
 				<p>Grupo: <select class="horas" id="grupos">
-					<option>Todos</option>
+					<!-- <option>Todos</option> -->
 					{% for gr in grupos %}
 					<option value="{{gr.codigo_grupo}}">G{{gr.numero_grupo}}_{{gr.nombre_materia}}</option>
 					{% endfor %}
@@ -225,7 +225,7 @@
 			{% include "temporio/profesor_tablero_publicacion.html" with noti=n %}
 		{%endfor%}
 
-	
+
 
 
 
